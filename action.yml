@@ -12,5 +12,3 @@ runs:
       shell: bash
     - run: env
       shell: bash
-    - run: ./goodbye.sh
-      shell: bash
