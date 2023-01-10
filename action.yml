@@ -1,14 +1,19 @@
-name: 'Hello World'
-description: 'Greet someone'
+name: 'debug'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  grep:
+    description: 'what to find'
     required: true
-    default: 'World'
+    default: ''
+outputs:
+  random:
+    description: "Random number"
+    value: ${{ steps.random.outputs.random-number }}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - id: env
+      run: env | grep "${{ inputs.grep }}"
       shell: bash
-    - run: env
+    - id: random
+      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
       shell: bash
